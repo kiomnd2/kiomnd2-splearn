@@ -23,7 +23,9 @@ class MemberTest {
                 return encode(password).equals(passwordHash);
             }
         };
-        member = Member.create("kiomnd2@ttt.com", "kiomnd2", "secret", encoder);
+
+        MemberCreateRequest request = new MemberCreateRequest("kiomnd2@ttt.com", "kiomnd2", "secret");
+        member = Member.create(request, encoder);
     }
 
     @Test
@@ -88,8 +90,30 @@ class MemberTest {
 
     @Test
     void changePassword() {
-        member.changePassword("changesecret");
+        member.changePassword("changesecret", encoder);
     
         assertThat(member.verifyPassword("changesecret", encoder)).isTrue();
+    }
+
+    @Test
+    void shouldBeActive() {
+        assertThat(member.isActive()).isFalse();
+
+        member.activate();
+
+        assertThat(member.isActive()).isTrue();
+
+        member.deactivate();
+
+        assertThat(member.isActive()).isFalse();
+    }
+
+    @Test
+    void invalidEmail() {
+        assertThatThrownBy(() -> {
+            Member.create(new MemberCreateRequest("invalid email", "kiomnd2", "secret"), encoder);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        Member.create(new MemberCreateRequest("kiomnd2@ttt.com", "kiomnd2", "secret"), encoder);
     }
 }
