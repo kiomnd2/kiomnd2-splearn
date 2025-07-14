@@ -1,7 +1,10 @@
 package kr.kiomn2.kiomnd2splearn.domain;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.regex.Pattern;
 
+@Embeddable
 public record Email(String address) {
     public Email {
         Pattern EMAIL_PATTERN =

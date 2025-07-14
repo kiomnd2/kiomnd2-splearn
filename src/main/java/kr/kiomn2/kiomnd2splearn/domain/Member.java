@@ -1,27 +1,37 @@
 package kr.kiomn2.kiomnd2splearn.domain;
 
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.lang.NonNull;
+import lombok.ToString;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import static org.springframework.util.Assert.state;
 
+@Entity
+@ToString
 @Getter
+@NaturalIdCache
 public class Member {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Embedded
+    @NaturalId
     private Email email;
 
     private String nickname;
 
     private String passwordHash;
 
+    @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
-    private Member() {}
+    protected Member() {}
 
-    public static Member create(MemberCreateRequest createRequest, PasswordEncoder passwordEncoder) {
+    public static Member register(MemberRegisterRequest createRequest, PasswordEncoder passwordEncoder) {
 //        return new MemberBuilder()
 //                .email(createRequest.email())
 //                .nickname(createRequest.nickname())

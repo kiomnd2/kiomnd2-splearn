@@ -3,6 +3,8 @@ package kr.kiomn2.kiomnd2splearn.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createMemberRegisterRequest;
+import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createPasswordEncoder;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,24 +14,15 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        encoder = new PasswordEncoder() {
-            @Override
-            public String encode(String password) {
-                return password.toLowerCase();
-            }
+        encoder = createPasswordEncoder();
 
-            @Override
-            public boolean matches(String password, String passwordHash) {
-                return encode(password).equals(passwordHash);
-            }
-        };
-
-        MemberCreateRequest request = new MemberCreateRequest("kiomnd2@ttt.com", "kiomnd2", "secret");
-        member = Member.create(request, encoder);
+        MemberRegisterRequest request = createMemberRegisterRequest();
+        member = Member.register(request, encoder);
     }
 
+
     @Test
-    void createMember() {
+    void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 
@@ -111,9 +104,10 @@ class MemberTest {
     @Test
     void invalidEmail() {
         assertThatThrownBy(() -> {
-            Member.create(new MemberCreateRequest("invalid email", "kiomnd2", "secret"), encoder);
+            Member.register(createMemberRegisterRequest("invalid email"), encoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Member.create(new MemberCreateRequest("kiomnd2@ttt.com", "kiomnd2", "secret"), encoder);
+        Member.register(createMemberRegisterRequest(), encoder);
     }
+
 }
