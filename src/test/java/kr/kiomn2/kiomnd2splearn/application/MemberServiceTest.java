@@ -14,6 +14,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -73,6 +74,11 @@ class MemberServiceTest {
     }
 
     static class MemberRepositoryStub implements MemberRepository {
+        @Override
+        public Optional<Member> findByEmail(Email email) {
+            return Optional.empty();
+        }
+
         @Override
         public Member save(Member member) {
             ReflectionTestUtils.setField(member, "id", 1L);

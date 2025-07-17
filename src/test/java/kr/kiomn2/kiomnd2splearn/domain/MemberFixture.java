@@ -2,7 +2,7 @@ package kr.kiomn2.kiomnd2splearn.domain;
 
 public class MemberFixture {
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {
-        return new MemberRegisterRequest(email, "kiomnd2", "secret");
+        return new MemberRegisterRequest(email, "kiomnd2", "secret123");
     }
 
     public static MemberRegisterRequest createMemberRegisterRequest() {

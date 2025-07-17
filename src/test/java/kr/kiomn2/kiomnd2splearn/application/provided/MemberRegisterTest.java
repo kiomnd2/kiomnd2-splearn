@@ -1,7 +1,7 @@
 package kr.kiomn2.kiomnd2splearn.application.provided;
 
 
-import kr.kiomn2.kiomnd2splearn.SplearnTestConfiguration;
+import jakarta.validation.ConstraintViolationException;
 import kr.kiomn2.kiomnd2splearn.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +34,13 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
         assertThatThrownBy(() -> memberRegister.register(MemberFixture.createMemberRegisterRequest()))
                 .isInstanceOf(DuplicateEmailException.class);
 
+    }
+
+    @Test
+    void memberRegisterRequestFail() {
+        var invalid = new MemberRegisterRequest("kiond2@splearn.com", "ki2", "secret123");
+//        memberRegister.register(invalid);
+        assertThatThrownBy(() -> memberRegister.register(invalid))
+                .isInstanceOf(ConstraintViolationException.class);
     }
 }

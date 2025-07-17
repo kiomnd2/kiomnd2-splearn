@@ -1,4 +1,4 @@
-package kr.kiomn2.kiomnd2splearn;
+package kr.kiomn2.kiomnd2splearn.application.provided;
 
 import kr.kiomn2.kiomnd2splearn.application.required.EmailSender;
 import kr.kiomn2.kiomnd2splearn.domain.MemberFixture;
