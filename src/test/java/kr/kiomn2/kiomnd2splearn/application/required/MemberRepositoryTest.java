@@ -3,15 +3,13 @@ package kr.kiomn2.kiomnd2splearn.application.required;
 import jakarta.persistence.EntityManager;
 import kr.kiomn2.kiomnd2splearn.domain.Member;
 import kr.kiomn2.kiomnd2splearn.domain.MemberFixture;
-import kr.kiomn2.kiomnd2splearn.domain.MemberRegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DataJpaTest
 class MemberRepositoryTest {
@@ -36,7 +34,6 @@ class MemberRepositoryTest {
 
     @Test
     void duplicateEmailFail() {
-
         Member member = Member.register(MemberFixture.createMemberRegisterRequest(), MemberFixture.createPasswordEncoder());
         memberRepository.save(member);
 

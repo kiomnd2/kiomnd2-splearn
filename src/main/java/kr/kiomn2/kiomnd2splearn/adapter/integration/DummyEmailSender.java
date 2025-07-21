@@ -2,9 +2,11 @@ package kr.kiomn2.kiomnd2splearn.adapter.integration;
 
 import kr.kiomn2.kiomnd2splearn.application.required.EmailSender;
 import kr.kiomn2.kiomnd2splearn.domain.Email;
+import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
 
 @Component
+@Fallback
 public class DummyEmailSender implements EmailSender {
 
     @Override

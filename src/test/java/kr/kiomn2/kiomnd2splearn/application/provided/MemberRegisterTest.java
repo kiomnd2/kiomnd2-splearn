@@ -1,13 +1,12 @@
 package kr.kiomn2.kiomnd2splearn.application.provided;
 
 
+import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import kr.kiomn2.kiomnd2splearn.domain.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.TestConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfiguration.class)
-public record MemberRegisterTest(MemberRegister memberRegister) {
+record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
 
     @Test
     void register() {
@@ -29,11 +28,24 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
 
     @Test
     void duplicateEmailFail() {
-        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        memberRegister.register(MemberFixture.createMemberRegisterRequest());
 
         assertThatThrownBy(() -> memberRegister.register(MemberFixture.createMemberRegisterRequest()))
                 .isInstanceOf(DuplicateEmailException.class);
 
+    }
+
+    @Test
+    void activate() {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        entityManager.flush();
+        entityManager.clear();
+
+        member = memberRegister.activate(member.getId());
+
+        entityManager.flush();
+
+        assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
     }
 
     @Test

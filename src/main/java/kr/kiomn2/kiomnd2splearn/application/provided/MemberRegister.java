@@ -9,4 +9,5 @@ import kr.kiomn2.kiomnd2splearn.domain.MemberRegisterRequest;
  */
 public interface MemberRegister {
     Member register(@Valid MemberRegisterRequest registerRequest);
+    Member activate(Long memberId);
 }

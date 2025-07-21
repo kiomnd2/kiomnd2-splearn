@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createMemberRegisterRequest;
 import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createPasswordEncoder;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MemberTest {
     Member member;
