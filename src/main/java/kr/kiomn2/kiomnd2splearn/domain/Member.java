@@ -11,7 +11,7 @@ import java.util.Objects;
 import static org.springframework.util.Assert.state;
 
 @Entity
-@ToString
+@ToString(callSuper = true)
 @Getter
 @NaturalIdCache
 public class Member extends AbstractEntity {
