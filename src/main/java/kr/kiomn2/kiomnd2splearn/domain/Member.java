@@ -25,6 +25,8 @@ public class Member extends AbstractEntity {
 
     private MemberStatus status;
 
+    private MemberDetail memberDetail;
+
     protected Member() {}
 
     public static Member register(MemberRegisterRequest createRequest, PasswordEncoder passwordEncoder) {
