@@ -1,7 +1,4 @@
-package kr.kiomn2.kiomnd2splearn.domain;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+package kr.kiomn2.kiomnd2splearn.domain.shared;
 
 import java.util.regex.Pattern;
 

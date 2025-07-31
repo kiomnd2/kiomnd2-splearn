@@ -1,10 +1,12 @@
 package kr.kiomn2.kiomnd2splearn.domain;
 
+import kr.kiomn2.kiomnd2splearn.domain.member.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createMemberRegisterRequest;
 import static kr.kiomn2.kiomnd2splearn.domain.MemberFixture.createPasswordEncoder;
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,6 +26,7 @@ class MemberTest {
     @Test
     void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(member.getMemberDetail().getRegisteredAt()).isNotNull();
     }
 
     @Test
@@ -32,6 +35,7 @@ class MemberTest {
         member.activate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
+        assertThat(member.getMemberDetail().getActivatedAt()).isNotNull();
     }
 
     @Test
@@ -108,6 +112,25 @@ class MemberTest {
         }).isInstanceOf(IllegalArgumentException.class);
 
         Member.register(createMemberRegisterRequest(), encoder);
+    }
+
+    @Test
+    void updateInfo() {
+        member.activate();
+
+        MemberInfoUpdateRequest request = new MemberInfoUpdateRequest("leo", "kiomnd100", "자기소개");
+        member.updateInfo(request);
+
+        assertThat(member.getNickname()).isEqualTo(request.nickname());
+        assertThat(member.getMemberDetail().getProfile().address()).isEqualTo(request.profileAddress());
+        assertThat(member.getMemberDetail().getIntroduction()).isEqualTo(request.introduction());
+
+    }
+    
+    @Test
+    void url() {
+        Profile kiond2 = new Profile("kiond2");
+        assertThat(kiond2.url()).isEqualTo("@kiond2");
     }
 
 }

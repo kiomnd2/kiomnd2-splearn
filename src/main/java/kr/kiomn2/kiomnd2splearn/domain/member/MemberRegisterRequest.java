@@ -1,4 +1,4 @@
-package kr.kiomn2.kiomnd2splearn.domain;
+package kr.kiomn2.kiomnd2splearn.domain.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;

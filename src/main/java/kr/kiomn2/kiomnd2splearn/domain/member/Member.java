@@ -1,6 +1,8 @@
-package kr.kiomn2.kiomnd2splearn.domain;
+package kr.kiomn2.kiomnd2splearn.domain.member;
 
 import jakarta.persistence.*;
+import kr.kiomn2.kiomnd2splearn.domain.AbstractEntity;
+import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
@@ -11,7 +13,7 @@ import java.util.Objects;
 import static org.springframework.util.Assert.state;
 
 @Entity
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "memberDetail")
 @Getter
 @NaturalIdCache
 public class Member extends AbstractEntity {
@@ -25,6 +27,7 @@ public class Member extends AbstractEntity {
 
     private MemberStatus status;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private MemberDetail memberDetail;
 
     protected Member() {}
@@ -43,6 +46,8 @@ public class Member extends AbstractEntity {
 
         member.status = MemberStatus.PENDING;
 
+        member.memberDetail = MemberDetail.create();
+
         return member;
     }
 
@@ -50,12 +55,14 @@ public class Member extends AbstractEntity {
         state(status == MemberStatus.PENDING, "PENDING 상태가 아닙니다.");
 
         this.status = MemberStatus.ACTIVE;
+        this.memberDetail.activated();
     }
 
     public void deactivate() {
         state(status == MemberStatus.ACTIVE, "ACTIVE 상태가 아닙니다.");
 
         this.status = MemberStatus.DEACTIVATED;
+        this.memberDetail.deactivated();
     }
 
     public boolean verifyPassword(String password, PasswordEncoder encoder) {
@@ -64,6 +71,12 @@ public class Member extends AbstractEntity {
 
     public void changeNickname(String nickname) {
         this.nickname = Objects.requireNonNull(nickname);
+    }
+
+    public void updateInfo(MemberInfoUpdateRequest updateRequest) {
+        this.nickname = Objects.requireNonNull(updateRequest.nickname());
+
+        this.memberDetail.updateInfo(updateRequest);
     }
 
     public void changePassword(String password, PasswordEncoder encoder) {

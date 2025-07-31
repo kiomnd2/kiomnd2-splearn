@@ -1,9 +1,13 @@
-package kr.kiomn2.kiomnd2splearn.application.provided;
+package kr.kiomn2.kiomnd2splearn.application.member.provided;
 
 
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import kr.kiomn2.kiomnd2splearn.domain.*;
+import kr.kiomn2.kiomnd2splearn.domain.member.DuplicateEmailException;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;

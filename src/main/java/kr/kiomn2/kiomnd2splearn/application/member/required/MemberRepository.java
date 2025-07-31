@@ -1,7 +1,7 @@
-package kr.kiomn2.kiomnd2splearn.application.required;
+package kr.kiomn2.kiomnd2splearn.application.member.required;
 
-import kr.kiomn2.kiomnd2splearn.domain.Email;
-import kr.kiomn2.kiomnd2splearn.domain.Member;
+import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

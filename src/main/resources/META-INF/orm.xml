@@ -13,7 +13,7 @@
             </id>
         </attributes>
     </mapped-superclass>
-    <entity class="kr.kiomn2.kiomnd2splearn.domain.Member">
+    <entity class="kr.kiomn2.kiomnd2splearn.domain.member.Member">
         <table name="member">
             <unique-constraint name="UK_MEMBER_EMAIL_ADDRESS">
                 <column-name>email_address</column-name>

@@ -1,7 +1,7 @@
 package kr.kiomn2.kiomnd2splearn.application;
 
-import kr.kiomn2.kiomnd2splearn.application.required.EmailSender;
-import kr.kiomn2.kiomnd2splearn.domain.Email;
+import kr.kiomn2.kiomnd2splearn.application.member.required.EmailSender;
+import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package kr.kiomn2.kiomnd2splearn.application.provided;
+package kr.kiomn2.kiomnd2splearn.application.member.provided;
 
-import kr.kiomn2.kiomnd2splearn.domain.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
 
 public interface MemberFinder {
     /**

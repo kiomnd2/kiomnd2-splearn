@@ -1,5 +1,6 @@
 package kr.kiomn2.kiomnd2splearn.domain;
 
+import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

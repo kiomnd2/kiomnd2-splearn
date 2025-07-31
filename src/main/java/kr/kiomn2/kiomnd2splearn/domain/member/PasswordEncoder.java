@@ -1,4 +1,4 @@
-package kr.kiomn2.kiomnd2splearn.domain;
+package kr.kiomn2.kiomnd2splearn.domain.member;
 
 public interface PasswordEncoder {
     String encode(String password);

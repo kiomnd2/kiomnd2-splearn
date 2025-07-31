@@ -1,6 +1,6 @@
 package kr.kiomn2.kiomnd2splearn.adapter.security;
 
-import kr.kiomn2.kiomnd2splearn.domain.PasswordEncoder;
+import kr.kiomn2.kiomnd2splearn.domain.member.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 

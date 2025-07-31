@@ -1,8 +1,8 @@
-package kr.kiomn2.kiomnd2splearn.application.provided;
+package kr.kiomn2.kiomnd2splearn.application.member.provided;
 
 import jakarta.validation.Valid;
-import kr.kiomn2.kiomnd2splearn.domain.Member;
-import kr.kiomn2.kiomnd2splearn.domain.MemberRegisterRequest;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
 
 /**
  * 회원의 등록과 관련된 기능을 제공한다

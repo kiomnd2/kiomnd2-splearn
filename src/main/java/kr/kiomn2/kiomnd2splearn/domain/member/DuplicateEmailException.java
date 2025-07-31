@@ -1,4 +1,4 @@
-package kr.kiomn2.kiomnd2splearn.domain;
+package kr.kiomn2.kiomnd2splearn.domain.member;
 
 public class DuplicateEmailException extends RuntimeException{
     public DuplicateEmailException(String message) {

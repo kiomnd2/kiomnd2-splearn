@@ -1,10 +1,14 @@
-package kr.kiomn2.kiomnd2splearn.application;
+package kr.kiomn2.kiomnd2splearn.application.member;
 
-import kr.kiomn2.kiomnd2splearn.application.provided.MemberFinder;
-import kr.kiomn2.kiomnd2splearn.application.provided.MemberRegister;
-import kr.kiomn2.kiomnd2splearn.application.required.EmailSender;
-import kr.kiomn2.kiomnd2splearn.application.required.MemberRepository;
-import kr.kiomn2.kiomnd2splearn.domain.*;
+import kr.kiomn2.kiomnd2splearn.application.member.provided.MemberFinder;
+import kr.kiomn2.kiomnd2splearn.application.member.provided.MemberRegister;
+import kr.kiomn2.kiomnd2splearn.application.member.required.EmailSender;
+import kr.kiomn2.kiomnd2splearn.application.member.required.MemberRepository;
+import kr.kiomn2.kiomnd2splearn.domain.member.DuplicateEmailException;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
+import kr.kiomn2.kiomnd2splearn.domain.member.PasswordEncoder;
+import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

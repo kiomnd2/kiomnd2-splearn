@@ -1,5 +1,8 @@
 package kr.kiomn2.kiomnd2splearn.domain;
 
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
+import kr.kiomn2.kiomnd2splearn.domain.member.PasswordEncoder;
+
 public class MemberFixture {
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {
         return new MemberRegisterRequest(email, "kiomnd2", "secret123");

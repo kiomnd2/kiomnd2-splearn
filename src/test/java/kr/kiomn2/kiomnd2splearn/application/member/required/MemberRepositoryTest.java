@@ -1,13 +1,15 @@
-package kr.kiomn2.kiomnd2splearn.application.required;
+package kr.kiomn2.kiomnd2splearn.application.member.required;
 
 import jakarta.persistence.EntityManager;
-import kr.kiomn2.kiomnd2splearn.domain.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.Member;
 import kr.kiomn2.kiomnd2splearn.domain.MemberFixture;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,6 +32,11 @@ class MemberRepositoryTest {
         assertThat(member.getId()).isNotNull();
 
         entityManager.flush();
+        entityManager.clear();
+
+        Member found = memberRepository.findById(member.getId()).orElseThrow();
+        assertThat(found.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(found.getMemberDetail().getRegisteredAt()).isNotNull();
     }
 
     @Test
