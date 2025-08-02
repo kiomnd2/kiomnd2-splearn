@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-@SpringBootTest
-@Transactional
+
 @Import(SplearnTestConfiguration.class)
+@Transactional
+@SpringBootTest
 record MemberFinderTest(MemberFinder memberFinder, MemberRegister memberRegister, EntityManager entityManager) {
 
     @Test

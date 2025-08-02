@@ -4,10 +4,7 @@ import kr.kiomn2.kiomnd2splearn.application.member.provided.MemberFinder;
 import kr.kiomn2.kiomnd2splearn.application.member.provided.MemberRegister;
 import kr.kiomn2.kiomnd2splearn.application.member.required.EmailSender;
 import kr.kiomn2.kiomnd2splearn.application.member.required.MemberRepository;
-import kr.kiomn2.kiomnd2splearn.domain.member.DuplicateEmailException;
-import kr.kiomn2.kiomnd2splearn.domain.member.Member;
-import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
-import kr.kiomn2.kiomnd2splearn.domain.member.PasswordEncoder;
+import kr.kiomn2.kiomnd2splearn.domain.member.*;
 import kr.kiomn2.kiomnd2splearn.domain.shared.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -56,5 +53,35 @@ public class MemberModifyService implements MemberRegister {
         }
     }
 
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberFinder.find(memberId);
 
+        member.deactivate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
+        Member member = memberFinder.find(memberId);
+
+        checkDuplicateProfile(member, updateRequest.profileAddress());
+
+        member.updateInfo(updateRequest);
+
+        return memberRepository.save(member);
+    }
+
+    private void checkDuplicateProfile(Member member, String profileAddress) {
+        if (profileAddress.isEmpty()) return;
+        Profile currentProfile = member.getMemberDetail().getProfile();
+        if (currentProfile != null && member.getMemberDetail().getProfile().address().equals(profileAddress)) {
+            return;
+        }
+
+        if (memberRepository.findByProfile(new Profile(profileAddress)).isPresent()) {
+            throw new DuplicateProfileException("이미 존재하는 프로필 주소입니다. ");
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package kr.kiomn2.kiomnd2splearn.domain.member;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import kr.kiomn2.kiomnd2splearn.domain.AbstractEntity;
@@ -24,8 +25,10 @@ public class MemberDetail extends AbstractEntity {
     @Embedded
     private Profile profile;
 
+    @Column(columnDefinition = "TEXT")
     private String introduction;
 
+    @Column(nullable = false)
     private LocalDateTime registeredAt;
 
     private LocalDateTime activatedAt;

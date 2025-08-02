@@ -2,6 +2,7 @@ package kr.kiomn2.kiomnd2splearn.application.member.provided;
 
 import jakarta.validation.Valid;
 import kr.kiomn2.kiomnd2splearn.domain.member.Member;
+import kr.kiomn2.kiomnd2splearn.domain.member.MemberInfoUpdateRequest;
 import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
 
 /**
@@ -10,4 +11,6 @@ import kr.kiomn2.kiomnd2splearn.domain.member.MemberRegisterRequest;
 public interface MemberRegister {
     Member register(@Valid MemberRegisterRequest registerRequest);
     Member activate(Long memberId);
+    Member deactivate(Long memberId);
+    Member updateInfo(Long memberId, @Valid MemberInfoUpdateRequest updateRequest);
 }
